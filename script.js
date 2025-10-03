@@ -1,4 +1,5 @@
-  // API Configuration - Data Layer
+ <script>
+        // API Configuration - Data Layer
         const API_KEY = 'JV0owZO7Q7qfg+ipn05MHw==gDfR15z2S736HKZp';
         const QUOTES_URL = 'https://api.api-ninjas.com/v1/quotes';
         const FACTS_URL = 'https://api.api-ninjas.com/v1/facts';
@@ -38,7 +39,8 @@
             try {
                 showLoading('quote', true);
                 
-                const data = await makeAPIRequest(QUOTES_URL);
+                // FIX: Pass the category parameter to the API
+                const data = await makeAPIRequest(QUOTES_URL, { category: category });
                 
                 if (!data || data.length === 0) {
                     throw new Error('No quotes found for this category');
