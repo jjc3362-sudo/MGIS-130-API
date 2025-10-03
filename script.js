@@ -185,7 +185,4 @@
 
         window.addEventListener('offline', () => {
             showError('No internet connection. Content will update when connection is restored.');
-        });
-    </script>
-</body>
-</html>
+        }); 
