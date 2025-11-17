@@ -38,12 +38,18 @@ async function getQuote(category) {
     try {
         showLoading('quote', true);
 
-        const data = await makeAPIRequest(QUOTES_URL, { category: category });
-        
-        if (!data || data.length === 0) {
-            throw new Error('No quotes found for this category');
+        // Note: Category parameter not supported in free tier
+        const data = await makeAPIRequest(QUOTES_URL);
+
+        // Check if API returned an error
+        if (data && data.error) {
+            throw new Error(data.error);
         }
-        
+
+        if (!data || data.length === 0) {
+            throw new Error('No quotes found');
+        }
+
         return data[0]; // API returns array, we want first quote
     } catch (error) {
         throw new Error(`Failed to get quote: ${error.message}`);
